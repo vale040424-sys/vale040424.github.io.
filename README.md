@@ -1,1 +1,515 @@
-# vale040424.github.io.
+# vale040424.github.io.[invitacion_f1.html](https://github.com/user-attachments/files/26117173/invitacion_f1.html)
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación VIP 🏎️</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Racing+Sans+One&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #e10600;
+    --red-dark: #a00400;
+    --red-glow: #ff2a1f;
+    --carbon: #0d0d0d;
+    --dark: #111318;
+    --panel: #1a1d24;
+    --panel2: #22262f;
+    --silver: #c8cdd8;
+    --silver-light: #e8ecf2;
+    --gold: #f5c842;
+    --accent: #ffffff;
+    --stripe: rgba(225,6,0,0.15);
+  }
+
+  html, body {
+    min-height: 100vh;
+    background: var(--carbon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Exo 2', sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Animated track grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(225,6,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(225,6,0,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: gridMove 8s linear infinite;
+    z-index: 0;
+  }
+
+  @keyframes gridMove {
+    from { background-position: 0 0; }
+    to { background-position: 0 40px; }
+  }
+
+  /* Speed lines */
+  .speedlines {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .line {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--red), transparent);
+    opacity: 0;
+    animation: speedLine linear infinite;
+  }
+  @keyframes speedLine {
+    0% { transform: translateX(-100vw); opacity: 0; }
+    10% { opacity: 0.5; }
+    90% { opacity: 0.5; }
+    100% { transform: translateX(100vw); opacity: 0; }
+  }
+
+  /* Pages */
+  .page {
+    position: relative;
+    z-index: 10;
+    width: min(500px, 94vw);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+  }
+  .page.active {
+    display: flex;
+    animation: revealCard 0.7s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+
+  @keyframes revealCard {
+    from { opacity: 0; transform: translateY(30px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Card */
+  .card {
+    background: var(--panel);
+    border: 1px solid rgba(225,6,0,0.4);
+    border-radius: 4px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px var(--panel2),
+      0 0 30px rgba(225,6,0,0.2),
+      0 30px 80px rgba(0,0,0,0.7);
+  }
+
+  /* Red top stripe */
+  .card-header-stripe {
+    height: 6px;
+    background: linear-gradient(90deg, var(--red-dark), var(--red), var(--red-glow), var(--red));
+    background-size: 200% 100%;
+    animation: stripeAnim 3s linear infinite;
+  }
+  @keyframes stripeAnim {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+  }
+
+  /* Carbon fiber texture top section */
+  .card-top {
+    background:
+      repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.015) 0px,
+        rgba(255,255,255,0.015) 1px,
+        transparent 1px,
+        transparent 8px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        rgba(255,255,255,0.015) 0px,
+        rgba(255,255,255,0.015) 1px,
+        transparent 1px,
+        transparent 8px
+      ),
+      var(--dark);
+    padding: 2.4rem 2.8rem 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .card-body {
+    padding: 0 2.8rem 2.4rem;
+    text-align: center;
+  }
+
+  /* Corner numbers */
+  .corner-num {
+    position: absolute;
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 4.5rem;
+    color: rgba(225,6,0,0.07);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .corner-num.tl { top: 8px; left: 12px; }
+  .corner-num.br { bottom: 8px; right: 12px; }
+
+  /* Car icon + animation */
+  .car-wrap {
+    position: relative;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.6rem;
+    overflow: hidden;
+  }
+  .car-icon {
+    font-size: 3.6rem;
+    display: inline-block;
+    animation: carIdle 0.12s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 12px rgba(225,6,0,0.6));
+  }
+  @keyframes carIdle {
+    from { transform: translateY(0px) rotate(-1deg); }
+    to { transform: translateY(-2px) rotate(1deg); }
+  }
+
+  /* Checkered flag row */
+  .flag-row {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    margin: 0.5rem 0 1rem;
+  }
+  .flag-cell {
+    width: 14px; height: 14px;
+    border-radius: 1px;
+  }
+
+  /* Title */
+  .greeting {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 2.1rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    text-shadow: 0 0 20px rgba(225,6,0,0.5);
+    line-height: 1.1;
+    margin-bottom: 0.2rem;
+  }
+  .greeting span { color: var(--red); }
+
+  .subtitle {
+    font-family: 'Exo 2', sans-serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--silver);
+    opacity: 0.7;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.8rem;
+  }
+
+  /* Button */
+  .btn {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.9rem 2.4rem;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(225,6,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  }
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+    transform: translateX(-100%);
+    transition: transform 0.4s;
+  }
+  .btn:hover { background: var(--red-glow); box-shadow: 0 6px 30px rgba(225,6,0,0.7); transform: translateY(-1px); }
+  .btn:hover::before { transform: translateX(100%); }
+  .btn:active { transform: translateY(1px); }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 1.4rem 0;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(225,6,0,0.5), transparent);
+  }
+  .divider span { color: var(--red); font-size: 0.75rem; letter-spacing: 0.15em; font-family: 'Orbitron', monospace; }
+
+  /* Page 2 specific */
+  .vip-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold), #d4a012);
+    color: var(--carbon);
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    padding: 0.3rem 0.9rem;
+    border-radius: 2px;
+    margin-bottom: 0.8rem;
+    box-shadow: 0 2px 12px rgba(245,200,66,0.4);
+  }
+
+  .main-title {
+    font-family: 'Racing Sans One', sans-serif;
+    font-size: 1.5rem;
+    color: var(--red);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 0 16px rgba(225,6,0,0.4);
+  }
+
+  .message-body {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.97rem;
+    font-style: italic;
+    line-height: 1.85;
+    color: var(--silver-light);
+    text-align: left;
+    margin: 0.6rem 0 0.4rem;
+    opacity: 0.9;
+  }
+
+  /* Ticket-style details box */
+  .ticket {
+    border: 1px solid rgba(225,6,0,0.35);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 1rem 0 1.2rem;
+    width: 100%;
+    background: var(--panel2);
+    position: relative;
+  }
+  .ticket::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--red);
+  }
+  .ticket-header {
+    background: rgba(225,6,0,0.12);
+    padding: 0.5rem 1.2rem 0.5rem 1.5rem;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    color: var(--red);
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(225,6,0,0.2);
+  }
+  .ticket-body { padding: 1rem 1.2rem 1rem 1.5rem; }
+
+  .detail-row {
+    display: flex;
+    gap: 0.8rem;
+    align-items: baseline;
+    margin-bottom: 0.55rem;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.97rem;
+    color: var(--silver-light);
+  }
+  .detail-row:last-child { margin-bottom: 0; }
+  .detail-icon { font-size: 1rem; min-width: 20px; }
+  .detail-label {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--red);
+    text-transform: uppercase;
+    min-width: 52px;
+    padding-top: 2px;
+  }
+
+  /* Dashed ticket divider */
+  .ticket-cut {
+    border: none;
+    border-top: 1px dashed rgba(225,6,0,0.3);
+    margin: 0.8rem 0;
+  }
+
+  .closing {
+    font-family: 'Exo 2', sans-serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--silver-light);
+    line-height: 1.6;
+  }
+  .closing strong {
+    font-family: 'Orbitron', monospace;
+    color: var(--red);
+    font-style: normal;
+    font-size: 1rem;
+  }
+
+  .flag-emoji-row {
+    margin-top: 0.8rem;
+    font-size: 1.3rem;
+    letter-spacing: 0.2em;
+    opacity: 0.8;
+  }
+
+  /* Bottom stripe */
+  .card-footer-stripe {
+    height: 4px;
+    background: repeating-linear-gradient(
+      90deg,
+      #111 0px, #111 12px,
+      white 12px, white 24px
+    );
+    opacity: 0.25;
+  }
+</style>
+</head>
+<body>
+
+<!-- Speed lines -->
+<div class="speedlines" id="speedlines"></div>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <div class="card">
+    <div class="card-header-stripe"></div>
+    <div class="card-top">
+      <div class="corner-num tl">1</div>
+      <div class="corner-num br">1</div>
+
+      <div class="car-wrap">
+        <span class="car-icon">🏎️</span>
+      </div>
+
+      <div class="flag-row" id="flags1"></div>
+
+      <h1 class="greeting">Hola<br><span>mi amor</span></h1>
+      <p class="subtitle">// mensaje especial en camino…</p>
+
+      <button class="btn" onclick="goToPage2()">▶ Ven te digo algo</button>
+    </div>
+    <div class="card-footer-stripe"></div>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <div class="card">
+    <div class="card-header-stripe"></div>
+    <div class="card-top">
+      <div class="corner-num tl">1</div>
+      <div class="corner-num br">1</div>
+
+      <div class="flag-row" id="flags2"></div>
+      <div class="vip-badge">🏆 VIP PASS · EDICIÓN ESPECIAL</div>
+      <h2 class="main-title">FELIZ DÍA, CAMPEÓN</h2>
+    </div>
+
+    <div class="card-body">
+      <p class="message-body">
+        Feliz día al hombre más maravilloso que la vida pudo poner en mi camino.
+        Estoy agradecida de poder tener a mi lado un hombre inteligente, valiente, fuerte, bondadoso,
+        con esa chispa tan única que lo caracteriza y con ese corazón tan lindo y lleno de amor.
+      </p>
+      <p class="message-body">
+        Por eso tienes una invitación por parte de tu novia <em>(la más linda, obvio)</em> para celebrarte. 🥂
+      </p>
+
+      <div class="divider"><span>◆ DETALLES DEL EVENTO ◆</span></div>
+
+      <div class="ticket">
+        <div class="ticket-header">🎫 Invitación Oficial · Temporada 2026</div>
+        <div class="ticket-body">
+          <div class="detail-row">
+            <span class="detail-icon">📅</span>
+            <span class="detail-label">Día</span>
+            <span>Domingo 22 de Marzo</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">⏱️</span>
+            <span class="detail-label">Hora</span>
+            <span>Válido para almuerzo o cena</span>
+          </div>
+          <hr class="ticket-cut">
+          <div class="detail-row">
+            <span class="detail-icon">📍</span>
+            <span class="detail-label">Lugar</span>
+            <span>Restaurante Tierra Negra <em style="opacity:0.65">(aquí nomás)</em></span>
+          </div>
+        </div>
+      </div>
+
+      <p class="closing">
+        Te espero en el podio, mi amor.<br>
+        <strong>TE AMO, GUAPO. 🏁</strong>
+      </p>
+
+      <div class="flag-emoji-row">🏁 🏎️ 🏁</div>
+    </div>
+    <div class="card-footer-stripe"></div>
+  </div>
+</div>
+
+<script>
+  // Speed lines
+  const slContainer = document.getElementById('speedlines');
+  for (let i = 0; i < 12; i++) {
+    const l = document.createElement('div');
+    l.className = 'line';
+    l.style.top = (5 + Math.random() * 90) + 'vh';
+    l.style.width = (80 + Math.random() * 120) + 'px';
+    l.style.animationDuration = (1.5 + Math.random() * 2.5) + 's';
+    l.style.animationDelay = (Math.random() * 4) + 's';
+    slContainer.appendChild(l);
+  }
+
+  // Checkered flags
+  function makeFlags(id) {
+    const row = document.getElementById(id);
+    if (!row) return;
+    const colors = ['#ffffff','#111111'];
+    for (let i = 0; i < 14; i++) {
+      const c = document.createElement('div');
+      c.className = 'flag-cell';
+      c.style.background = colors[(i + Math.floor(i/1)) % 2];
+      row.appendChild(c);
+    }
+  }
+  makeFlags('flags1');
+  makeFlags('flags2');
+
+  function goToPage2() {
+    document.getElementById('page1').style.display = 'none';
+    const p2 = document.getElementById('page2');
+    p2.classList.add('active');
+  }
+</script>
+</body>
+</html>
